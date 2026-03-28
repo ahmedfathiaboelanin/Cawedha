@@ -1,0 +1,6 @@
+[
+  { "id": "1", "title":"أساسيات البرمجة","badge": "Basics", "img": "/basics.jpeg" },
+  { "id": "2", "title":"الواجهة الامامية","badge": "Frontend", "img": "/front.png" },
+  { "id": "3", "title":"الواجهة الخلفية","badge": "Backend", "img": "/backend.jpg" },
+  { "id": "4", "title":"التطوير الشامل","badge": "Fullstack", "img": "/fullstack.png" }
+]

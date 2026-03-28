@@ -1,0 +1,6 @@
+[
+    { "id": "1", "fname": "Khalid", "lname": "Mohamed", "username": "ahmedfathi", "pass": "123123123", "img": "layout\/uploaded\/ahmedfathi\/IMG-20220504-WA0064.jpg", "admin": "1" },
+    { "id": "2", "fname": "mohamed", "lname": "fathi", "username": "mofathi", "pass": "12341234", "img": null, "admin": "0" },
+    { "id": "4", "fname": "fbsjdb", "lname": "jfbajhdb", "username": "absfhabsgh", "pass": "123123123", "img": "layout\/uploaded\/absfhabsgh\/Ui.png", "admin": "0" },
+    { "id": "6", "fname": "Mohamed", "lname": "Ahmed", "username": "fadl234@", "pass": "fadl234@sc", "img": null, "admin": "0" }
+]

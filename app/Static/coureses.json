@@ -1,0 +1,149 @@
+[
+  {
+    "id": "1",
+    "track": "Basics",
+    "title": "C++",
+    "img": "/c++.png",
+    "description": "مقدمة إلى لغة البرمجة C++"
+  },
+  {
+    "id": "2",
+    "track": "Backend",
+    "title": "PHP",
+    "img": "/php.png",
+    "description": "تعلم أساسيات لغة PHP لتطوير الخوادم"
+  },
+  {
+    "id": "3",
+    "track": "Basics",
+    "title": "Github",
+    "img": "/git.jpg",
+    "description": "إدارة المشاريع والتعاون عبر GitHub"
+  },
+  {
+    "id": "4",
+    "track": "Basics",
+    "title": "Data Structure",
+    "img": "/ds.jpeg",
+    "description": "مقدمة لهياكل البيانات وأنواعها"
+  },
+  {
+    "id": "5",
+    "track": "Basics",
+    "title": "CS50",
+    "img": "/cs50.jpg",
+    "description": "دورة CS50 لمقدمة شاملة لعلوم الحاسب"
+  },
+  {
+    "id": "6",
+    "track": "Basics",
+    "title": "OOP",
+    "img": "/oop.jpeg",
+    "description": "مفاهيم البرمجة الكائنية (OOP)"
+  },
+  {
+    "id": "7",
+    "track": "Frontend",
+    "title": "HTML",
+    "img": "/Html.png",
+    "description": "أساسيات تصميم صفحات الويب باستخدام HTML"
+  },
+  {
+    "id": "8",
+    "track": "Frontend",
+    "title": "CSS",
+    "img": "/css.png",
+    "description": "تزيين صفحات الويب باستخدام CSS"
+  },
+  {
+    "id": "9",
+    "track": "Frontend",
+    "title": "JavaScript",
+    "img": "/js.jpg",
+    "description": "إضافة التفاعلية للويب باستخدام JavaScript"
+  },
+  {
+    "id": "10",
+    "track": "Frontend",
+    "title": "Bootstrap",
+    "img": "/boot.png",
+    "description": "تصميم واجهات جميلة وسريعة باستخدام Bootstrap"
+  },
+  {
+    "id": "11",
+    "track": "Frontend",
+    "title": "Sass",
+    "img": "/sass.png",
+    "description": "تحسين CSS باستخدام لغة Sass"
+  },
+  {
+    "id": "12",
+    "track": "Frontend",
+    "title": "Jquery",
+    "img": "/jquerry.png",
+    "description": "تسهيل التعامل مع JavaScript عبر مكتبة jQuery"
+  },
+  {
+    "id": "13",
+    "track": "Frontend",
+    "title": "React",
+    "img": "/react.png",
+    "description": "إنشاء واجهات مستخدم ديناميكية باستخدام React"
+  },
+  {
+    "id": "14",
+    "track": "Frontend",
+    "title": "Vue",
+    "img": "/vue.jpg",
+    "description": "إطار عمل لبناء واجهات المستخدم باستخدام Vue"
+  },
+  {
+    "id": "15",
+    "track": "Frontend",
+    "title": "Front-end",
+    "img": "/front.png",
+    "description": "مقدمة شاملة لتطوير واجهات المستخدم"
+  },
+  {
+    "id": "16",
+    "track": "Frontend",
+    "title": "Angular",
+    "img": "/angular.png",
+    "description": "تطوير تطبيقات ويب ديناميكية باستخدام Angular"
+  },
+  {
+    "id": "23",
+    "track": "Backend",
+    "title": "Django",
+    "img": "/django.png",
+    "description": "تطوير تطبيقات ويب قوية باستخدام Django"
+  },
+  {
+    "id": "24",
+    "track": "Backend",
+    "title": "Laravel",
+    "img": "/laravel.jpg",
+    "description": "تطوير تطبيقات PHP حديثة باستخدام Laravel"
+  },
+  {
+    "id": "25",
+    "track": "Backend",
+    "title": "MySQL",
+    "img": "/mysql.jpg",
+    "description": "إدارة قواعد البيانات باستخدام MySQL"
+  },
+  {
+    "id": "27",
+    "track": "Backend",
+    "title": "Python",
+    "img": "/python.jpg",
+    "description": "تعلم لغة Python لتطوير البرمجيات والخوادم"
+  },
+  {
+    "id": "28",
+    "track": "Fullstack",
+    "title": "Fullstack",
+    "img": "/fullstack.png",
+    "description": "تطوير تطبيقات كاملة من الواجهة إلى الخادم"
+  }
+]
