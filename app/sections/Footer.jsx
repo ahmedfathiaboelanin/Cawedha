@@ -21,17 +21,17 @@ export default function Footer() {
                 <h1 className='text-white text-2xl'>تواصل معنا</h1>
                 <a href="#" className='text-white text-lg'>البريد الإلكتروني:
                     <span className='text-blue-300'>
-                        info@example.com
+                        ahmedfathiaboelanin@gmail.com
                     </span>
                 </a>
                 <a href="#" className='text-white text-lg'>رقم الهاتف:
                     <span className='text-blue-300'>
-                        +123 456 7890
+                        01040284664
                     </span>
                 </a>
-                <a href="#" className='text-white text-lg'>العنوان:
+                <a href="#" className='text-white text-lg'>Github:
                     <span className='text-blue-300'>
-                        123 شارع التعليم، مدينة المعرفة
+                        https://github.com/ahmedfathiaboelanin
                     </span>
                 </a>
 
