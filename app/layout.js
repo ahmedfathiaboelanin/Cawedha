@@ -3,6 +3,7 @@ import { Changa } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./sections/Footer";
+import { ToastContainer } from "react-toastify";
 
 const changa = Changa({
   subsets: ["arabic"],
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <Footer />
+        <ToastContainer />
       </body>
     </html>
   );
