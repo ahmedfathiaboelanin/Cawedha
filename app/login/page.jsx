@@ -1,7 +1,5 @@
 'use client'
 import React from 'react'
-import { FaBook } from 'react-icons/fa'
-import {MdOutlineEmail, MdPassword} from 'react-icons/md'
 import TextSection from './TextSection'
 import FormSection from './FormSection'
 function Login() {
