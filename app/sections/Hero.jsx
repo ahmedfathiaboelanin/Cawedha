@@ -8,7 +8,7 @@ export default function Hero() {
             <Image src={"/hero1.png"} alt="Hero Image" width={600} height={400} className='w-full hidden md:flex' />
             <div className="flex flex-col items-start px-3 lg:mt-10 mt-0 w-full justify-center" dir='rtl'>
                 <div className="flex flex-col items-start w-full gap-3">
-                    <h1 className='text-[50px] text-blue-700 leading-15 tracking-tight font-semibold text-wrap w-112.5'>
+                    <h1 className='text-[50px] text-blue-700 leading-15 tracking-tight font-semibold text-wrap md:w-112.5 wrap-break-word'>
                         طوِّر مهاراتك.
                         شكّل حياتك المهنية
                     </h1>

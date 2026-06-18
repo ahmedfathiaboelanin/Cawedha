@@ -1,24 +1,12 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 'use client'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Card from '../components/Card'
-import instance from '../_axios'
 import TRACKS from '../Static/Tracks.json'
 export default function Tracks() {
     const [categories, setCategories] = useState(TRACKS);
-    // loading state can be added here if needed
-    const [loading, setLoading] = useState(true);
-    const getGategories = async () => {
-        let res = await instance.get('/api/categories')
-        setCategories(res.data);
-        setLoading(false);
-    }
-    useEffect(() => {
-        getGategories();
-    }, [])
     return (
-        <div className='p-20 flex flex-col items-center gap-4' dir='rtl'>
+        <div className='p-5 md:p-20 mt-10 flex flex-col items-center gap-4' dir='rtl'>
             <Link href='#' className='text-3xl font-bold text-gray-700'>الدورات التدريبية</Link>
             <div className="h-0.75 w-50 duration-150 transition-all bg-blue-900 rounded-full"></div>
             <p className='text-gray-400 text-[20px]'>اختر الدورة التي تناسبك وابدأ رحلتك التعليمية</p>
@@ -26,7 +14,7 @@ export default function Tracks() {
                 {
                     categories.map(
                         (category) => (
-                            <Card key={category.id} title={category.name} imageUrl={category.img} />
+                            <Card key={category.id} title={category.title} imageUrl={category.img} />
                         )
                     )
                 }

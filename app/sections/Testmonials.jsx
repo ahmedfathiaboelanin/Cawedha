@@ -26,8 +26,7 @@ export default function Testmonials() {
                 </h1>
                 <div className="h-0.75 mt-2 w-50 duration-150 transition-all bg-blue-900 rounded-full"></div>
             </div>
-            <div className="flex justify-center rounded-box gap-5">
-
+            <div className="flex justify-center rounded-box gap-5 flex-wrap">
                 {comments.map((comment, index) => (
                     <TestmonialsCard key={index} comment={comment.comment} user={comment.user} />
                 ))}
