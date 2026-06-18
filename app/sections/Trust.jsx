@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Trust() {
     return (
-        <div className='p-20 flex flex-col bg-gray-100 items-center gap-4'>
+        <div className='md:p-20 flex flex-col bg-gray-100 items-center gap-4'>
             <p className='text-gray-400 text-[18px]'>Trusted by 45M+ users</p>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 flex-wrap gap-10'>
                 <div className="w-40 h-30 bg-gray-200 rounded-lg flex items-center justify-center">
