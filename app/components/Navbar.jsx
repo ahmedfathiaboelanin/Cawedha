@@ -1,16 +1,25 @@
-import React from 'react'
+/* eslint-disable react-hooks/set-state-in-effect */
+'use client'
+import React, { useEffect, useState } from 'react'
 import SignupBtn from './SignupBtn';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '../store/useAuthStore';
 
 export default function Navbar() {
+    const router = useRouter()  
+    const { logout, token } = useAuthStore();
+    const handleLogout = () => {
+        logout();
+        router.push('/login');
+    }
+
     return (
-        // make the navbar sticky to the top of the page and add a shadow to it
         <header className='sticky top-0 z-50 bg-zinc-50 border-b-gray-100 shadow-md'>
             <nav className='flex items-center justify-between px-10 py-5'>
                 <div className="drawer xl:hidden">
                     <input id="my-drawer-1" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content">
-                        {/* Page content here */}
                         <label htmlFor="my-drawer-1" className="btn drawer-button">
                             <div className="hamburger-menue">
                                 <div className="w-6 h-0.5 bg-gray-600 mb-1"></div>
@@ -25,21 +34,47 @@ export default function Navbar() {
                             {/* Sidebar content here */}
                             <Link href="/courses" className='text-gray-600 text-xl hover:border-b-3 px-2 transition-all duration-75 hover:border-blue-500'>الدورات</Link>
                             <br /><br />
-                            <SignupBtn />
-                            <br />
-                            <Link href={'/login'} className='text-blue-600 text-lg'>
-                                تسجيل الدخول
-                            </Link>
+                            {
+                                token ?
+                                    <>
+                                        <Link href="/profile" className='text-blue-600 text-lg'>
+                                            الملف الشخصي
+                                        </Link>
+                                        <br />
+                                        <button onClick={handleLogout} className='cursor-pointer border border-red-600 text-lg text-red-600 px-3 py-2 rounded'>
+                                            تسجيل الخروج
+                                        </button>
+                                    </> :
+                                    <>
+                                        <SignupBtn />
+                                        <br />
+                                        <Link href={'/login'} className='text-blue-600 text-lg'>
+                                            تسجيل الدخول
+                                        </Link>
+                                    </>
+                            }
                         </ul>
                     </div>
                 </div>
                 {/* btns */}
-                <div className='hidden xl:flex gap-5 items-center'>
-                    <SignupBtn />
-                    <Link href={'/login'} className='text-blue-600 text-lg'>
-                        تسجيل الدخول
-                    </Link>
-                </div>
+                {
+                    token ? 
+                        <div className='hidden xl:flex gap-5 items-center'>
+                            <button onClick={handleLogout} className='cursor-pointer border border-red-600 text-lg text-red-600 px-3 py-2 rounded'>
+                                تسجيل الخروج
+                            </button>
+                            <Link href="/profile" className='text-blue-600 text-lg'>
+                                الملف الشخصي
+                            </Link>
+                        </div>
+                    :
+                    <div className='hidden xl:flex gap-5 items-center'>
+                        <SignupBtn />
+                        <Link href={'/login'} className='text-blue-600 text-lg'>
+                            تسجيل الدخول
+                        </Link>
+                    </div>
+                }
                 {/* search bar */}
                 <div className="w-150 hidden xl:flex justify-center items-center gap-2 relative">
                     <button className='flex gap-2 absolute left-2 justify-center items-center bg-blue-500 text-white p-2 text-sm rounded-full'>ابحث</button>
