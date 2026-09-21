@@ -1,111 +1,97 @@
-/* eslint-disable react-hooks/set-state-in-effect */
-'use client'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { FaArrowLeft } from 'react-icons/fa'
-import { MdInfo } from 'react-icons/md'
-import InfoSection from './InfoSection'
-import { useAuthStore } from '../store/useAuthStore'
-import instance from '../_axios'
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { FaArrowLeft, FaBookmark } from 'react-icons/fa';
+import InfoSection from './InfoSection';
+import { useAuthStore } from '../store/useAuthStore';
+import instance from '../_axios';
 
-const courses = [
-    {
-        title: 'Front-end',
-        category: 'front-end',
-        progress: 70,
-        image: '/front.png',
-        link: '#'
-    },
-    {
-        title: 'Back-end',
-        category: 'back-end',
-        progress: 50,
-        image: '/backend.jpg',
-        link: '#'
-    },
-    {
-        title: 'Full-stack',
-        category: 'full-stack',
-        progress: 30,
-        image: '/fullstack.png',
-        link: '#'
-    }
-]
+const FALLBACK = [
+  { course_id: '13', course: { name: 'React', description: 'إنشاء واجهات مستخدم ديناميكية باستخدام React', img: '/react.png' }, progress: 70 },
+  { course_id: '27', course: { name: 'Python', description: 'تعلم لغة Python لتطوير البرمجيات والخوادم', img: '/python.jpg' }, progress: 45 },
+  { course_id: '7', course: { name: 'HTML', description: 'أساسيات تصميم صفحات الويب باستخدام HTML', img: '/Html.png' }, progress: 100 },
+];
 
 export default function CoursesSection() {
-    const { user } = useAuthStore()
-    const [favoriteCourses, setFavoriteCourses] = useState([]);
-    const getFavoriteCourses = async () => {
-        try {
-            let response = await instance.get(`api/favorites/user/${user.id}`)
-            setFavoriteCourses(response.data)
-        }catch(error){
-            console.error('Error fetching favorite courses:', error);
-        }
-    }
+  const { user } = useAuthStore();
+  const [favorites, setFavorites] = useState(FALLBACK);
+  const [tab, setTab] = useState('all');
 
-    useEffect(() => {
-        if (user) {
-            getFavoriteCourses();
-        }
-    }, [user])
+  useEffect(() => {
+    if (!user) return;
+    (async () => {
+      try {
+        const res = await instance.get(`api/favorites/user/${user.id}`);
+        if (Array.isArray(res.data) && res.data.length) setFavorites(res.data);
+      } catch {
+        /* keep fallback */
+      }
+    })();
+  }, [user]);
 
-    return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 items-start w-full gap-5 mt-5">
-            <InfoSection/>
-            <div className="col-span-2 bg-white p-5 rounded-lg shadow-md">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200 mt-5">
-                    الدورات التدريبية
-                    <MdInfo className="inline-block ml-2 text-blue-700" />
-                </h2>
-                <div className="grid grid-cols-3 gap-5 mt-5" dir='rtl'>
-                    {
-                        favoriteCourses.length === 0 &&
-                        <>
-                            <p className='text-gray-600 text-center col-span-3'>لا توجد دورات مفضلة بعد. قم بإضافة بعض الدورات إلى المفضلة لعرضها هنا!</p>
-                            
-                            <div className="flex justify-center col-span-3">
-                                <Link href="/courses" className='bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors'>
-                                    تصفح الدورات
-                                </Link>
-                            </div>
-                        </>
-                    }
-                    {
-                        favoriteCourses.map((course, index) => 
-                            <div key={index} className="border-3 text-start border-blue-100 p-5 rounded-lg transition-all duration-200 hover:shadow-lg   bg-gray-100 ">
-                                <Image src={course.course.img} alt={course.course.name} width={400} height={200} className="rounded bg-gray-200 h-55 object-cover" />
-                                <div className="flex justify-between mt-4">
-                                    <h2 className="text-xl">{course.course.name}</h2>
-                                    <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-4 group-hover:bg-white group-hover:text-blue-600">
-                                        {/* {course.category} */}
-                                    </span>
-                                </div>
-                                <p className='my-3 text-gray-800'>{course.course.description}</p>
-                                <div className="w-full bg-gray-200 rounded-full h-2 mb-4" title={`${course.progress}%`}>
-                                    <div className="bg-blue-600 h-2 rounded-full" style={{ width: `${course.progress}%` }}></div>
-                                </div>
-                                {
-                                    course.progress === 100 ?
-                                        <>
-                                            <span className="text-green-600 font-bold">مكتملة</span>
-                                        </>
-                                        :
-                                        <span className="text-gray-600 font-bold">
-                                            {course.progress.toFixed(1)}% -
-                                            قيد التقدم
-                                        </span>
-                                }
-                                <Link href={`/courses/${course.course_id}`} className='group-hover:text-white text-blue-600 font-bold text-lg flex items-center gap-2 justify-start'>
-                                    الذهاب إلى الدورة
-                                    <FaArrowLeft />
-                                </Link>
-                            </div>
-                        )
-                    }
-                </div>
-            </div>
+  const list = tab === 'done' ? favorites.filter((c) => (c.progress || 0) >= 100) : tab === 'in' ? favorites.filter((c) => (c.progress || 0) < 100) : favorites;
+
+  return (
+    <div className="mt-5 grid grid-cols-1 items-start gap-5 lg:grid-cols-3">
+      <InfoSection />
+      <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:p-6 lg:col-span-2 dark:border-white/10 dark:bg-slate-900">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="flex items-center gap-2 text-lg font-extrabold text-slate-900 dark:text-white">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-amber-500/10 text-amber-500">
+              <FaBookmark />
+            </span>
+            دوراتي التدريبية
+          </h2>
+          <div className="flex gap-1.5 rounded-full bg-slate-100 p-1 dark:bg-white/5">
+            {[
+              ['all', 'الكل'],
+              ['in', 'قيد التقدم'],
+              ['done', 'مكتملة'],
+            ].map(([v, l]) => (
+              <button
+                key={v}
+                onClick={() => setTab(v)}
+                className={`rounded-full px-4 py-1.5 text-sm font-bold transition ${tab === v ? 'bg-white text-blue-700 shadow dark:bg-blue-600 dark:text-white' : 'text-slate-500 dark:text-slate-400'}`}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
         </div>
-    )
+
+        {list.length === 0 ? (
+          <div className="mt-5 rounded-2xl border border-dashed border-slate-300 p-8 text-center dark:border-white/10">
+            <p className="font-bold text-slate-500">لا توجد دورات في هذا التبويب بعد.</p>
+            <Link href="/courses" className="mt-3 inline-block rounded-xl bg-blue-600 px-5 py-2.5 font-bold text-white">
+              تصفح الدورات
+            </Link>
+          </div>
+        ) : (
+          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2" dir="rtl">
+            {list.map((c, i) => (
+              <div key={i} className="group overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.03]">
+                <div className="relative h-40 overflow-hidden">
+                  <Image src={c.course?.img || '/front.png'} alt={c.course?.name || 'course'} width={400} height={200} className="h-full w-full object-cover transition group-hover:scale-105" />
+                  <span className={`absolute right-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-black ${(c.progress || 0) >= 100 ? 'bg-green-500 text-white' : 'bg-white/90 text-blue-700'}`}>
+                    {(c.progress || 0) >= 100 ? 'مكتملة ✓' : `${Number(c.progress || 0).toFixed(0)}%`}
+                  </span>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-extrabold text-slate-900 dark:text-white">{c.course?.name}</h3>
+                  <p className="clamp-2 mt-1 text-sm text-slate-500">{c.course?.description}</p>
+                  <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-white/10">
+                    <div className="h-full rounded-full bg-gradient-to-l from-blue-700 to-cyan-400" style={{ width: `${c.progress || 0}%` }} />
+                  </div>
+                  <Link href={`/courses/${c.course_id}`} className="mt-3 flex items-center gap-2 text-sm font-black text-blue-700 dark:text-blue-300">
+                    الذهاب إلى الدورة <FaArrowLeft className="text-xs" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }

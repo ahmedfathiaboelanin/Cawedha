@@ -1,73 +1,15 @@
-/* eslint-disable react-hooks/set-state-in-effect */
-'use client'
-import React, { useEffect, useState } from 'react'
-import CourseCard from '../components/CourseCard'
-import { FaArrowDown } from 'react-icons/fa'
-import instance from '../_axios'
-import CATEGORIES from '../Static/Tracks.json'
-import COURSES from '../Static/coureses.json'
+import { Suspense } from 'react';
+import CoursesClient from './CoursesClient';
 
+export const metadata = {
+  title: 'الدورات التدريبية | كوّدها',
+  description: 'تصفح جميع الدورات التدريبية في البرمجة: أساسيات، فرونت إند، باك إند وفل ستاك.',
+};
 
-function Coureses() {
-    const [filter, setFilter] = useState('All');
-    const [categories, setCategories] = useState(CATEGORIES);
-    const [courses, setCourses] = useState(COURSES);
-    const [courseCount, setCourseCount] = useState(8);
-    const [loading, setLoading] = useState(true);
-    const filterCourses = (name) => {
-        setLoading(true);
-        setCourseCount(8);
-        setFilter(name);
-        setTimeout(() => {
-            setLoading(false);
-        }, 500)
-    }
-
-
-
-    return (
-        <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black text-end">
-            <main className="min-h-screen p-10 w-full">
-                <h1 className='text-4xl'>الدورا التدريبية</h1>
-                <p className='text-2xl mt-4'>
-                    يمكنك بدء مسيرتك المهنية أو تغييرها أو تطويرها باستخدام كوِِدها كدليل لك
-                </p>
-                <div className="filter flex flex-row-reverse gap-3 mt-6">
-                    <button onClick={() => filterCourses('All')} className={`px-4 py-2 border cursor-pointer hover:text-white hover:bg-blue-600 border-blue-600 text-blue-600 rounded-md mr-2 ${filter === 'All' ? 'bg-blue-600 text-white' : ''}`}>
-                        كل الدورات
-                    </button>
-                    {
-                        categories.map((category) => (
-                            <button key={category.id} onClick={() => filterCourses(category.badge)} className={`px-4 py-2 border cursor-pointer hover:text-white hover:bg-blue-600 border-blue-600 text-blue-600 rounded-md mr-2 ${filter === category.title ? 'bg-blue-600 text-white' : ''}`}>
-                                {category.title}
-                            </button>
-                        ))
-                    }
-                </div>
-                <div dir='rtl' className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-                    {
-                        filter === 'All' ? courses.slice(0, courseCount).map((course, index) => (
-                            <CourseCard key={index} {...course} />
-                        )) :
-                            courses.filter(course => course.track == filter).slice(0, courseCount).map((course, index) => (
-                                <CourseCard key={index} {...course} />
-                            ))
-                    }
-                </div>
-                {
-                    (filter === 'All' ? courseCount < courses.length : courseCount < courses.filter(course => course.track == filter).length) &&
-                    <div className="w-full flex justify-center mt-10">
-                        <button className='flex flex-col gap-2 text-blue-500 cursor-pointer items-center' onClick={() => setCourseCount(courseCount + 4)}>
-                            عرض المزيد
-                            <FaArrowDown className='text-2xl animate-bounce' />
-                        </button>
-
-                    </div>
-
-                }
-            </main>
-        </div>
-    )
+export default function CoursesPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-50 dark:bg-slate-950" />}>
+      <CoursesClient />
+    </Suspense>
+  );
 }
-
-export default Coureses

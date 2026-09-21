@@ -1,31 +1,32 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import { Changa } from "next/font/google";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import Footer from "./sections/Footer";
+import BackToTop from "./components/BackToTop";
 import { ToastContainer } from "react-toastify";
 
 const changa = Changa({
   subsets: ["arabic"],
-  weight: ["300", "400", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
-
 export const metadata = {
-  title: "كَوِِدْهَا",
-  description: "منصة تعليمية شاملة لتعلم البرمجة وتطوير المهارات التقنية. نقدم دورات تدريبية عالية الجودة في مجالات تطوير الواجهة الأمامية، تطوير الواجهة الخلفية، تطوير التطبيقات، الذكاء الاصطناعي، علوم البيانات، وأمن المعلومات. انضم إلينا اليوم وابدأ رحلتك في عالم التكنولوجيا مع كَوِِدْهَا.",
+  title: "كَوِّدها | منصة تعلم البرمجة بالعربية",
+  description:
+    "منصة تعليمية شاملة لتعلم البرمجة وتطوير المهارات التقنية. نقدم دورات تدريبية عالية الجودة في مجالات تطوير الواجهة الأمامية، تطوير الواجهة الخلفية، تطوير التطبيقات، الذكاء الاصطناعي، علوم البيانات، وأمن المعلومات.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${changa.className} antialiased`}
-      >
+    <html lang="ar" dir="rtl">
+      <body className={`${changa.className} bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100`}>
         <Navbar />
-        {children}
+        <div className="min-h-screen">{children}</div>
         <Footer />
-        <ToastContainer />
+        <BackToTop />
+        <ToastContainer position="bottom-left" theme="colored" autoClose={3000} rtl />
       </body>
     </html>
   );
